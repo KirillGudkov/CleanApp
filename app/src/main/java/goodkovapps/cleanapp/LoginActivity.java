@@ -113,18 +113,23 @@ public class LoginActivity extends AppCompatActivity {
      * @throws IOException
      */
     public void sendMessage () throws IOException {
-        code = generateCode(code);
-        System.out.println(code);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        try {
+            code = generateCode(code);
+            System.out.println(code);
+            HttpURLConnection connection = (HttpURLConnection) new URL
+                    ("http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=7"+
+                            phone.getText().toString()+
+                            "&text="+code).openConnection();
+            connection.setRequestMethod("GET");
+            connection.getResponseCode();
+        }
+        catch (Exception e) {
+            Toast.makeText(LoginActivity.this, "Can't send. Check your Internet connection", Toast.LENGTH_SHORT).show();
+        }
 
-        HttpURLConnection connection = (HttpURLConnection) new URL
-                ("http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=7"+
-                phone.getText().toString()+
-                "&text="+code).openConnection();
-        connection.setRequestMethod("GET");
-        connection.getResponseCode();
     }
 
 }
