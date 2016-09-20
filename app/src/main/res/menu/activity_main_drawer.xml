@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/registration"
+            android:icon="@drawable/adduser"
+            android:title="Зарегистрироваться"
+            android:visible="false"/>
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/login"
+            android:title="Ваш номер подтверждён"
+            android:visible="false"/>
+        <item
+            android:id="@+id/make_order"
+            android:icon="@drawable/make_order"
+            android:title="Оформить заказ" />
+        <item
+            android:id="@+id/history"
+            android:icon="@drawable/comment"
+            android:title="Просмотреть историю заказов" />
+        <item
+            android:id="@+id/promo"
+            android:icon="@drawable/sale"
+            android:title="Ввести промокод" />
+        <item
+            android:id="@+id/price"
+            android:icon="@drawable/order"
+            android:title="Наши услуги" />
+        <item
+            android:id="@+id/act"
+            android:icon="@drawable/act"
+            android:title="Акции" />
+    </group>
+
+    <item android:title="Контактная информация">
+        <menu>
+            <item
+                android:id="@+id/call"
+                android:icon="@drawable/call_us"
+                android:title="Обратная связь" />
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/exit"
+                android:title="Выйти"
+                android:visible="false"/>
+        </menu>
+    </item>
+
+</menu>
