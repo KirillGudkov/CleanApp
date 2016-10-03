@@ -1,5 +1,6 @@
 package goodkovapps.cleanapp;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -15,70 +19,80 @@ import android.widget.TextView;
 
 public class TabOne extends Fragment {
 
-    private Button addRoom;
-    private Button addToilet;
-    private Button addArea;
+    private TextView mCountRooms;
+    private TextView mCountToilet;
+    private TextView mArea;
 
-    private Button removeRoom;
-    private Button removeToilet;
-    private Button removeArea;
-
-    private TextView countRooms;
-    private TextView countToilet;
-    private TextView area;
-
-    private int rooms = 1;
-    private int toilets = 1;
-    private int areas = 1;
+    private SeekBar mSeekRooms;
+    private SeekBar mSeekToilet;
+    private SeekBar mSeekArea;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_one,container,false);
 
-        addRoom = (Button) v.findViewById(R.id.addRoom);
-        addToilet = (Button) v.findViewById(R.id.addToilet);
-        addArea = (Button) v.findViewById(R.id.addArea);
+        mCountRooms = (TextView) v.findViewById(R.id.countRooms);
+        mCountToilet = (TextView) v.findViewById(R.id.countToilet);
+        mArea = (TextView) v.findViewById(R.id.area);
 
-        removeRoom = (Button) v.findViewById(R.id.removeRoom);
-        removeToilet = (Button) v.findViewById(R.id.removeToilet);
-        removeArea = (Button) v.findViewById(R.id.removeArea);
+        mSeekRooms = (SeekBar) v.findViewById(R.id.seekBarRooms);
+        mSeekToilet = (SeekBar) v.findViewById(R.id.seekBarToilet);
+        mSeekArea = (SeekBar) v.findViewById(R.id.seekBarArea);
 
-        countRooms = (TextView) v.findViewById(R.id.countRooms);
-        countToilet = (TextView) v.findViewById(R.id.countToilet);
-        area = (TextView) v.findViewById(R.id.area);
+        mSeekRooms.setMax(100);
+        mSeekToilet.setMax(100);
+        mSeekArea.setMax(500);
 
-        View.OnClickListener onClickListener = new View.OnClickListener() {
+        mSeekRooms.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.addRoom:
-                        countRooms.setText(Integer.toString(++rooms));
-                        break;
-                    case R.id.addToilet:
-                        countToilet.setText(Integer.toString(++toilets));
-                        break;
-                    case R.id.addArea:
-                        area.setText(Integer.toString(++areas));
-                        break;
-                    case R.id.removeRoom:
-                        countRooms.setText(Integer.toString(--rooms));
-                        break;
-                    case R.id.removeToilet:
-                        countToilet.setText(Integer.toString(--toilets));
-                        break;
-                    case R.id.removeArea:
-                        area.setText(Integer.toString(--areas));
-                        break;
-                }
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mCountRooms.setText(String.valueOf(mSeekRooms.getProgress()));
             }
-        };
-        addRoom.setOnClickListener(onClickListener);
-        addToilet.setOnClickListener(onClickListener);
-        addArea.setOnClickListener(onClickListener);
-        removeRoom.setOnClickListener(onClickListener);
-        removeToilet.setOnClickListener(onClickListener);
-        removeArea.setOnClickListener(onClickListener);
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mSeekToilet.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mCountToilet.setText(String.valueOf(mSeekToilet.getProgress()));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mSeekArea.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mArea.setText(String.valueOf(mSeekArea.getProgress()));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         return v;
     }
 }

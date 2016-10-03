@@ -8,7 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">Зарегистрироваться</string>
+    <string name="title_activity_login">Регистрация</string>
     <string name="title_activity_order">Сделать заказ</string>
 
     <!-- Strings related to login -->
@@ -107,18 +107,20 @@
         <item>Вынос/вывоз мусора на свалку</item>
     </string-array>
     <string-array name="price">
-        <item>6000 рублей</item>
-        <item>300 рублей</item>
-        <item>200 рублей</item>
-        <item>300 рублей</item>
-        <item>300 рублей</item>
-        <item>500 рублей</item>
-        <item>200 рублей</item>
-        <item>200 рублей</item>
-        <item>300 рублей</item>
-        <item>600 рублей</item>
-        <item>1300 рублей</item>
-        <item>2100 рублей</item>
-        <item>350 рублей</item>
+        <item>6000</item>
+        <item>300</item>
+        <item>200</item>
+        <item>300</item>
+        <item>300</item>
+        <item>500</item>
+        <item>200</item>
+        <item>200</item>
+        <item>300</item>
+        <item>600</item>
+        <item>1300</item>
+        <item>2100</item>
+        <item>350</item>
     </string-array>
+    <string name="title_activity_final_order">FinalOrder</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

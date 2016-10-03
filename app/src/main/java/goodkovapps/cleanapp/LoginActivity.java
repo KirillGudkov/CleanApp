@@ -1,3 +1,13 @@
+/**
+ * Создан sillybird 20.09.2016
+ *
+ * Активити регистрации номера телефона и подтверждения через смс
+ * используется API сайта sms.ru
+ * http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=number_of_phone&text=here_your_message"
+ * с помощью http отправляется GET запрос содержащий номер и текст ссообения
+ *
+ */
+
 package goodkovapps.cleanapp;
 
 import android.app.PendingIntent;
@@ -7,24 +17,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 
-/**
- * Активити регистрации номера телефона и подтверждения через смс
- * используется API сайта sms.ru
- * http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=number_of_phone&text=here_your_message"
- * с помощью http отправляется GET запрос содержащий номер и текст ссообения
- */
 public class LoginActivity extends AppCompatActivity {
     private Button send;
     private Button done;
@@ -37,13 +40,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         done = (Button) findViewById(R.id.btn_done);
         send = (Button) findViewById(R.id.sendSMS);
         phone = (EditText) findViewById(R.id.phone);
         gettingCode = (EditText) findViewById(R.id.view_for_code);
-        phone.requestFocus();
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         pi = PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
+        getSupportActionBar().setElevation(0);
 
         /**
          * Обработчик нажатия на кнопку "отправить код"
@@ -55,15 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     sendMessage();
                     send.setText("Отправить снова");
-                    done.setVisibility(View.VISIBLE);
-                    gettingCode.setVisibility(View.VISIBLE);
+                    done.setEnabled(true);
+                    gettingCode.setEnabled(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             });
+
         /**
-         * Обработчик проверит введённый код в edittext на соответствие сгенерированному
+         * Обработчик проверит введённый код в editText на соответствие сгенерированному
          */
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,11 +92,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon action bar is clicked; go to parent activity
-                this.finish();
+                    /**
+                     * Обрабатывает конопку в аппбаре "домой"
+                     * Прбивает текущую активность и стартует предыдущую
+                     */
+                    this.finish();
                 return true;
             case R.id.action_settings:
                 return true;
@@ -105,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
      * @return возвращает строку
      */
     public String generateCode (String code) {
-        return code = Integer.toString(new Random(System.currentTimeMillis()).nextInt(10000 - 1000) + 1000);
+        return code = Integer.toString(new Random(
+                      System.currentTimeMillis()).nextInt(10000 - 1000) + 1000);
     }
 
     /**
@@ -113,12 +129,20 @@ public class LoginActivity extends AppCompatActivity {
      * @throws IOException
      */
     public void sendMessage () throws IOException {
+        /**
+         * этот фрагмент кода решает проблему возникающую при отправке http-запроса
+         * понятия не имею что он делает, но без этого запрос не отправляется
+         */
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
         try {
             code = generateCode(code);
+
+            //TODO: удалить строку с sout, после отладки механизма авторизации
             System.out.println(code);
+
             HttpURLConnection connection = (HttpURLConnection) new URL
                     ("http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=7"+
                             phone.getText().toString()+
@@ -129,7 +153,6 @@ public class LoginActivity extends AppCompatActivity {
         catch (Exception e) {
             Toast.makeText(LoginActivity.this, "Can't send. Check your Internet connection", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

@@ -1,113 +1,130 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="goodkovapps.cleanapp.LoginActivity">
+    tools:context="goodkovapps.cleanapp.LoginActivity"
+    android:background="@color/colorPrimary">
 
     <!-- Login progress -->
 
-    <TableLayout
-        android:layout_width="300dp"
-        android:layout_height="315dp"
-        android:layout_column="1"
-        android:layout_row="1"
-        android:layout_gravity="top|center_horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="5"
+        android:orientation="vertical"
+        android:layout_gravity="top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="121dp"
+            app:srcCompat="@drawable/splash"
+            android:id="@+id/imageView3"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_row="0"
+            android:layout_column="1" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="224dp"
-            android:layout_height="76dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/enter_number_of_phone"
-            android:textAlignment="center"
+            android:textAlignment="gravity"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="22sp" />
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
-        <ScrollView
-            android:id="@+id/login_form"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <GridLayout
-                android:id="@+id/email_login_form"
+            <EditText
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_column="26"
+                android:layout_gravity="center_horizontal"
+                android:layout_row="1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="phone"
+                android:text="+7"
+                android:textSize="26dp"
+                android:textColor="?android:attr/textColorPrimaryInverse"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+
+            <EditText
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="center_horizontal"
+                android:layout_row="1"
+                android:ems="10"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:numeric="integer"
+                android:phoneNumber="true"
+                android:textSize="26sp"
+                android:textColor="?android:attr/textColorPrimaryInverse"
+                android:layout_weight="1" />
 
-                <EditText
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="26"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="-180dp"
-                    android:layout_row="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="phone"
-                    android:text="+7"
-                    android:textSize="26dp" />
-
-                <EditText
-                    android:id="@+id/phone"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="50dp"
-                    android:layout_row="1"
-                    android:ems="10"
-                    android:focusable="true"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:numeric="integer"
-                    android:phoneNumber="true"
-                    android:textAlignment="center"
-                    android:textSize="26sp"
-                    android:background="@drawable/editviewcustom_edit_text_holo_light"
-                    android:textCursorDrawable="@drawable/color_cursor"/>
-
-            </GridLayout>
-        </ScrollView>
+        </LinearLayout>
 
         <Button
             android:id="@+id/sendSMS"
-            style="?android:textAppearanceSmall"
-            android:layout_width="100dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
             android:text="@string/action_sign_in"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
+
+        <TextView
+            android:text="Код из смс"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="12sp" />
 
         <EditText
-            android:id="@+id/view_for_code"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="true"
-            android:gravity="center"
             android:inputType="number"
-            android:maxLength="4"
+            android:ems="10"
+            android:id="@+id/view_for_code"
+            android:gravity="center"
+            android:enabled="false"
             android:textAlignment="center"
-            android:visibility="invisible"
-            android:background="@drawable/editviewcustom_edit_text_holo_light"
-            android:textCursorDrawable="@drawable/color_cursor"/>
+            android:maxLength="4"
+            android:editable="false"
+            android:visibility="visible"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
         <Button
-            android:id="@+id/btn_done"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="true"
-            android:gravity="center"
             android:text="@string/done"
-            android:visibility="invisible" />
-    </TableLayout>
+            android:id="@+id/btn_done"
+            android:gravity="center"
+            android:enabled="false"
+            android:visibility="visible"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:clickable="false" />
 
-</GridLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
