@@ -3,7 +3,6 @@
  *
  * Активити регистрации номера телефона и подтверждения через смс
  * используется API сайта sms.ru
- * http://sms.ru/sms/send?api_id=B0DF083C-C411-51DA-D018-EF0C6FB3C9EB&to=number_of_phone&text=here_your_message"
  * с помощью http отправляется GET запрос содержащий номер и текст ссообения
  *
  */
